@@ -16,20 +16,30 @@ const DisplayFields = () => {
       {fields.length === 0 ? (
         <p>No fields added yet.</p>
       ) : (
-        <ul>
-          {fields.map((field, index) => (
-            <li key={index}>
-              <strong>Field Name:</strong> {field.name}, <strong>Type:</strong> {field.type},{' '}
-              <strong>Validation:</strong> {field.validation}
-              {field.type === 'dropdown' && (
-                <>
-                  , <strong>Data:</strong> {field.data.join(', ')}
-                </>
-              )}
-              <button onClick={() => handleRemoveField(index)}>Remove Field</button>
-            </li>
-          ))}
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Field Name</th>
+              <th>Type</th>
+              <th>Validation</th>
+              <th>Data</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {fields.map((field, index) => (
+              <tr key={index}>
+                <td>{field.name}</td>
+                <td>{field.type}</td>
+                <td>{field.validation}</td>
+                <td>{field.type === 'dropdown' ? field.data.join(', ') : '-'}</td>
+                <td>
+                  <button onClick={() => handleRemoveField(index)}>Remove Field</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );
